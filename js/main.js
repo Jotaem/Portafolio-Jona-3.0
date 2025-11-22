@@ -91,7 +91,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             `;
             
             row.appendChild(col);
-            generatePDFThumbnail(cert.path, col.querySelector('.certificate-thumbnail'));
         }
         
         slide.appendChild(row);
