@@ -59,26 +59,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         ]
     };
 
-    // ===== CERTIFICADOS DE TÍTULO (Grid Normal) =====
-    const degreeContainer = document.getElementById('degreeCertificates');
-    for (const cert of certificateData.degree) {
-        const col = document.createElement('div');
-        col.className = 'col-md-6 col-lg-4';
-        col.innerHTML = `
-            <a href="${cert.path}" target="_blank" class="certificate-link">
-                <div class="certificate-thumbnail" data-pdf="${cert.path}">
-                    <div class="certificate-placeholder">
-                        <i class="bi bi-file-pdf"></i>
-                        <p>PDF</p>
-                    </div>
-                </div>
-                <p class="certificate-title text-center">${cert.title}</p>
-            </a>
-        `;
-        degreeContainer.appendChild(col);
-        generatePDFThumbnail(cert.path, col.querySelector('.certificate-thumbnail'));
-    }
-
     // ===== BOOTSTRAP CAROUSEL LINKEDIN =====
     const carouselInner = document.getElementById('linkedinCarouselInner');
     const itemsPerSlide = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
