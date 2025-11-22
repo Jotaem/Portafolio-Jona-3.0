@@ -100,8 +100,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ===== GENERAR MINIATURAS PDF =====
     async function generatePDFThumbnail(pdfPath, containerElement) {
         try {
+            const encodedPdfPath = encodeURI(pdfPath);
             // Fetch del PDF
-            const pdf = await pdfjsLib.getDocument(pdfPath).promise;
+            const pdf = await pdfjsLib.getDocument(encodedPdfPath).promise;
             const page = await pdf.getPage(1);
             
             // Calcular viewport
