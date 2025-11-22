@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan Matus - Ingeniero en Logística & Desarrollador de Soluciones</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="text-body">
+
+    <!-- Header & Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-body shadow-sm sticky-top">
+        <div class="container-xl">
+            <a class="navbar-brand fw-bold fs-4 text-primary" href="#inicio">
+                <i class="bi bi-lightning-fill"></i> JONATHAN MATUS
+            </a>
+            <div class="d-flex align-items-center gap-2 order-lg-last">
+                <button class="btn btn-sm btn-outline-secondary me-2" id="themeToggle" title="Alternar tema">
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#proyecto">Proyecto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#evolucion">Evolución</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#certificados">Certificados</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white ms-2" href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. Sección Hero -->
+    <section id="inicio" class="py-5 py-lg-6">
+        <div class="container-xl text-center py-5">
+            <h1 class="display-3 fw-bold mb-3 animate-fade-in">
+                JONATHAN MATUS
+            </h1>
+            <h2 class="fs-2 text-primary fw-semibold mb-4">
+                Ingeniero en Logística & Desarrollador de Soluciones
+            </h2>
+            <p class="fs-5 text-body-secondary mx-auto mb-5 max-width-700">
+                Transformando +16 años de experiencia operativa en software de alto impacto. 
+                De la bodega al código.
+            </p>
+            <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                <a href="#proyecto" class="btn btn-primary btn-lg px-4 shadow-sm hover-lift">
+                    <i class="bi bi-rocket-takeoff"></i> Ver Proyecto Estrella (LiveOps Engine)
+                </a>
+                <a href="#contacto" class="btn btn-outline-secondary btn-lg px-4 hover-lift">
+                    <i class="bi bi-envelope"></i> Contactar
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Sobre Mí (El "Viaje del Héroe") -->
+    <section id="sobre-mi" class="py-5 py-lg-6 bg-body-secondary">
+        <div class="container-xl">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold mb-4">
+                        El puente entre Operaciones y Tecnología.
+                    </h2>
+                    <p class="fs-5 text-body-secondary mb-3">
+                        No soy un desarrollador tradicional. Soy un experto en Operaciones Logísticas que aprendió a programar para resolver problemas reales que las herramientas estándar no cubrían.
+                    </p>
+                    <p class="fs-5 text-body-secondary mb-3">
+                        Con una trayectoria sólida en empresas como Agrosuper y PedidosYa, evolucioné de gestionar bodegas y flotas a diseñar arquitecturas de software (AI3) que automatizan decisiones críticas en tiempo real. 
+                    </p>
+                    <p class="fs-5 text-body fw-semibold">
+                        Entiendo el negocio, entiendo el código y, lo más importante, entiendo la urgencia.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-body p-4 rounded-3 shadow-lg">
+                        <div class="d-flex align-items-start gap-3 mb-4 p-3 rounded-2 bg-primary bg-opacity-10 hover-card">
+                            <span class="fs-1">🚀</span>
+                            <div>
+                                <h3 class="fw-bold fs-5 text-body">+16 Años en Logística</h3>
+                                <p class="text-body-secondary mb-0">De operador de bodega a líder de operaciones de última milla.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-start gap-3 mb-4 p-3 rounded-2 bg-success bg-opacity-10 hover-card">
+                            <span class="fs-1">🐍</span>
+                            <div>
+                                <h3 class="fw-bold fs-5 text-body">Python Developer Autodidacta</h3>
+                                <p class="text-body-secondary mb-0">Creando soluciones con Python, SQL, Selenium y APIs.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-start gap-3 p-3 rounded-2 bg-info bg-opacity-10 hover-card">
+                            <span class="fs-1">📊</span>
+                            <div>
+                                <h3 class="fw-bold fs-5 text-body">Data-Driven Leader</h3>
+                                <p class="text-body-secondary mb-0">Experto en Looker Studio, Grafana y KPIs operativos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Case Study: LiveOps Engine -->
+    <section id="proyecto" class="py-5 py-lg-6">
+        <div class="container-xl">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">
+                    Proyecto Estrella: LiveOps Engine (AI3)
+                </h2>
+                <p class="fs-5 text-body-secondary">Arquitectura de Automatización Logística calificada como "Activo Estratégico Regional".</p>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 hover-card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-danger"><i class="bi bi-exclamation-triangle"></i> El Desafío</h5>
+                            <p class="card-text">Cuello de botella manual: +5.000 órdenes mensuales requerían gestión individual, generando saturación del equipo y mala experiencia al usuario.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 hover-card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-primary"><i class="bi bi-lightbulb"></i> La Solución</h5>
+                            <p class="card-text">Desarrollo in-house de una app 100% Python (PyQt5, MVC Pattern) con automatización de 'Tercera Capa', integrando Scraping (Selenium), APIs y reportes en tiempo real.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 hover-card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-success"><i class="bi bi-check-circle"></i> Los Resultados</h5>
+                            <p class="card-text">Capacidad del equipo multiplicada por 5X, +82% de gestiones automatizadas y +15.000 órdenes rescatadas de una mala experiencia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <div class="text-center mb-4">
+                    <h3 class="fs-4 fw-semibold mb-3">Resultados del Proyecto (KPIs)</h3>
+                    <div class="d-flex justify-content-center gap-2 flex-wrap">
+                        <button class="btn btn-primary active-chart-btn" id="showImpactChart" data-chart="impact">
+                            <i class="bi bi-graph-up"></i> Impacto en Órdenes
+                        </button>
+                        <button class="btn btn-outline-primary inactive-chart-btn" id="showAutomationChart" data-chart="automation">
+                            <i class="bi bi-gear"></i> Nivel de Automatización
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chart-container mx-auto bg-body rounded-3 p-4 shadow-sm">
+                    <canvas id="impactChart"></canvas>
+                    <canvas id="automationChart" class="d-none"></canvas>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h3 class="fs-5 fw-semibold mb-3">Stack Tecnológico del Proyecto</h3>
+                <div class="d-flex justify-content-center flex-wrap gap-2">
+                    <span class="badge bg-warning text-dark"><i class="bi bi-snake"></i> Python</span>
+                    <span class="badge bg-success"><i class="bi bi-robot"></i> Selenium</span>
+                    <span class="badge bg-info"><i class="bi bi-database"></i> BigQuery</span>
+                    <span class="badge bg-orange"><i class="bi bi-graph-up"></i> Grafana</span>
+                    <span class="badge bg-secondary"><i class="bi bi-chat-dots"></i> Slack API</span>
+                    <span class="badge bg-danger"><i class="bi bi-window"></i> PyQt5</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Lo que dicen mis líderes (Prueba Social) -->
+    <section id="testimonios" class="py-5 py-lg-6 bg-body-secondary">
+        <div class="container-xl">
+            <h2 class="display-5 fw-bold text-center mb-5">
+                Prueba Social: Evaluaciones de Liderazgo
+            </h2>
+            <div class="row g-4">
+                
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 hover-card">
+                        <div class="card-body">
+                            <blockquote class="fs-6 text-body mb-4">
+                                "Aloys y José Luis validaron la herramienta como un <strong class='text-primary'>activo estratégico regional (un 'tesoro')</strong> que resuelve el problema de la efectividad de LiveOps."
+                            </blockquote>
+                            <a href="assets/performance_reviews/Análisis post presentación del proyecto Noviembre 2025.pdf" target="_blank" class="text-decoration-none">
+                                <div class="fw-semibold text-body">Análisis Post-Presentación</div>
+                                <div class="text-body-secondary small">Noviembre 2025</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 hover-card">
+                        <div class="card-body">
+                            <blockquote class="fs-6 text-body mb-4">
+                                "Has pasado de la falta de protocolos a ser una fortaleza. <strong class='text-primary'>No hubiera sido posible llevar este desafío con tal nivel de autonomía</strong> con ninguna otra persona."
+                            </blockquote>
+                            <a href="assets/performance_reviews/Performance_2024_endyear.pdf" target="_blank" class="text-decoration-none">
+                                <div class="fw-semibold text-body">Evaluación Anual de Desempeño</div>
+                                <div class="text-body-secondary small">End-Year 2024</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 hover-card">
+                        <div class="card-body">
+                            <blockquote class="fs-6 text-body mb-4">
+                                "Eres un <strong class='text-primary'>ejemplo sostenido de perseverancia, intencionalidad y mentalidad de crecimiento.</strong> Has trabajado con disciplina para desarrollar tu seniority."
+                            </blockquote>
+                            <a href="assets/performance_reviews/Performance_2025_midyear.pdf" target="_blank" class="text-decoration-none">
+                                <div class="fw-semibold text-body">Evaluación de Desempeño</div>
+                                <div class="text-body-secondary small">Mid-Year 2025</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Trayectoria & Evolución -->
+    <section id="evolucion" class="py-5 py-lg-6">
+        <div class="container-xl">
+            <h2 class="display-5 fw-bold text-center mb-5">
+                Evolución Profesional
+            </h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content card h-100 shadow-sm border-0 hover-card">
+                        <div class="card-body">
+                            <div class="row align-items-start g-3">
+                                <div class="col-auto">
+                                    <img src="assets/images/pedidosya.png" alt="PedidosYa" class="company-logo">
+                                </div>
+                                <div class="col">
+                                    <h4 class="fw-bold text-body">Arquitecto de Soluciones & Live Perf. Coordinator</h4>
+                                    <span class="badge bg-primary mb-2">PedidosYa (2024 - Presente)</span>
+                                    <p class="text-body-secondary mb-0">Hito: Creación del "LiveOps Engine" (AI3). Multipliqué la capacidad del equipo por 5X y automaticé el 82% de las gestiones operativas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content card h-100 shadow-sm border-0 hover-card">
+                        <div class="card-body">
+                            <div class="row align-items-start g-3">
+                                <div class="col-auto">
+                                    <img src="assets/images/pedidosya.png" alt="PedidosYa" class="company-logo">
+                                </div>
+                                <div class="col">
+                                    <h4 class="fw-bold text-body">Supervisor Logístico & Referente Técnico</h4>
+                                    <span class="badge bg-primary mb-2">PedidosYa (2021 - 2024)</span>
+                                    <p class="text-body-secondary mb-3">Hito: Lideré la optimización de la zona Sur-Norte. Desarrollé herramientas de detección de fraude y alertas sistémicas, siendo descrito como "referente técnico".</p>
+                                    <p class="text-body-secondary small mb-0">
+                                        <strong>Evaluaciones de desempeño:</strong>
+                                        <a href="assets/performance_reviews/Performance_2021_endyear.pdf" target="_blank" class="text-primary">2021</a>,
+                                        <a href="assets/performance_reviews/Performance_2022_midyear.pdf" target="_blank" class="text-primary">2022 (Mid)</a>,
+                                        <a href="assets/performance_reviews/Performance_2022_endyear.pdf" target="_blank" class="text-primary">2022 (End)</a>,
+                                        <a href="assets/performance_reviews/Performance_2023_midyear.pdf" target="_blank" class="text-primary">2023 (Mid)</a>,
+                                        <a href="assets/performance_reviews/Performance_2023_endyear.pdf" target="_blank" class="text-primary">2023 (End)</a>,
+                                        <a href="assets/performance_reviews/Performance_2024_midyear.pdf" target="_blank" class="text-primary">2024 (Mid)</a>,
+                                        <a href="assets/performance_reviews/Performance_2024_endyear.pdf" target="_blank" class="text-primary">2024 (End)</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content card h-100 shadow-sm border-0 hover-card">
+                        <div class="card-body">
+                            <div class="row align-items-start g-3">
+                                <div class="col-auto">
+                                    <img src="assets/images/fullify.jpg" alt="Fullify" class="company-logo">
+                                </div>
+                                <div class="col">
+                                    <h4 class="fw-bold text-body">Jefe de Transporte</h4>
+                                    <span class="badge bg-warning text-dark mb-2">Fullify (2020 - 2021)</span>
+                                    <p class="text-body-secondary mb-0">Hito: Liderazgo de flota de última milla y optimización de costos para e-commerce durante la alta demanda de pandemia.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content card h-100 shadow-sm border-0 hover-card">
+                        <div class="card-body">
+                            <div class="row align-items-start g-3">
+                                <div class="col-auto">
+                                    <img src="assets/images/agrosuper.png" alt="Agrosuper" class="company-logo">
+                                </div>
+                                <div class="col">
+                                    <h4 class="fw-bold text-body">Carrera Ascendente en Operaciones</h4>
+                                    <span class="badge bg-success mb-2">Agrosuper (2011 - 2020)</span>
+                                    <p class="text-body-secondary mb-0">Hito: Evolución desde Operador de Bodega hasta Analista de Operaciones y Jefe de Turno, demostrando resiliencia y crecimiento desde la base.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Stack Tecnológico & Educación -->
+    <section id="skills" class="py-5 py-lg-6 bg-body-secondary">
+        <div class="container-xl">
+            <h2 class="display-5 fw-bold text-center mb-5">
+                Skills & Stack Tecnológico
+            </h2>
+            <div class="row g-4 mb-5">
+                
+                <div class="col-lg-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <h3 class="fs-5 fw-bold mb-4"><i class="bi bi-tools"></i> Stack Tecnológico (Tech)</h3>
+                            <ul class="list-unstyled space-y-2">
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-info mt-1"></span>
+                                    <div>
+                                        <strong>Python (Avanzado):</strong> Desarrollo de apps, scripts y automatización.
+                                    </div>
+                                </li>
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-info mt-1"></span>
+                                    <div>
+                                        <strong>SQL (MySQL):</strong> Diseño y consulta de bases de datos relacionales.
+                                    </div>
+                                </li>
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-info mt-1"></span>
+                                    <div>
+                                        <strong>Automatización:</strong> Selenium, Pandas, Requests, Google Apps Script.
+                                    </div>
+                                </li>
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-info mt-1"></span>
+                                    <div>
+                                        <strong>Data Viz:</strong> Looker Studio (Avanzado), Grafana, Tableau (Básico).
+                                    </div>
+                                </li>
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-info mt-1"></span>
+                                    <div>
+                                        <strong>Herramientas:</strong> Google Cloud (BigQuery), SAP MM, Git, APIs.
+                                    </div>
+                                </li>
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-info mt-1"></span>
+                                    <div>
+                                        <strong>Frontend:</strong> HTML, CSS, Bootstrap, PyQt5 (Desktop UI).
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <h3 class="fs-5 fw-bold mb-4"><i class="bi bi-rocket"></i> Habilidades de Logística & Liderazgo (Ops)</h3>
+                            <ul class="list-unstyled space-y-2">
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-success mt-1"></span>
+                                    <div>Gestión de Operaciones en Tiempo Real (LiveOps).</div>
+                                </li>
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-success mt-1"></span>
+                                    <div>Liderazgo y Desarrollo de Equipos Técnicos.</div>
+                                </li>
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-success mt-1"></span>
+                                    <div>Estrategia de KPIs y Optimización de Procesos.</div>
+                                </li>
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-success mt-1"></span>
+                                    <div>Gestión de Proyectos (Metodologías Ágiles).</div>
+                                </li>
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-success mt-1"></span>
+                                    <div>Operaciones de Última Milla y Gestión de Flota.</div>
+                                </li>
+                                <li class="py-2 d-flex align-items-start gap-2 hover-item">
+                                    <span class="badge bg-success mt-1"></span>
+                                    <div>Análisis Causa-Raíz (RCA) y Detección de Fraude.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-5">
+                <h3 class="fs-4 fw-bold text-center mb-4"><i class="bi bi-mortarboard"></i> Educación & Certificaciones</h3>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0 text-center hover-card">
+                            <div class="card-body">
+                                <h5 class="fw-bold text-primary mb-2">Ingeniería en Logística</h5>
+                                <p class="text-body-secondary mb-2">IP Escuela de Comercio de Santiago</p>
+                                <p class="text-success fw-medium small mb-0">Titulado con Distinción Máxima (6.4)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0 text-center hover-card">
+                            <div class="card-body">
+                                <h5 class="fw-bold text-primary mb-2">Diplomado en Diseño y Gestión Ágil de Proyectos</h5>
+                                <p class="text-body-secondary mb-2">U. Playa Ancha / Fundación Telefónica</p>
+                                <p class="text-success fw-medium small mb-0">Calificación 100/100</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0 text-center hover-card">
+                            <div class="card-body">
+                                <h5 class="fw-bold text-primary mb-2">Técnico Nivel Superior en Gestión Logística</h5>
+                                <p class="text-body-secondary mb-2">Duoc UC</p>
+                                <p class="text-success fw-medium small mb-0">Nota Titulación 6.2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <p class="text-body-secondary">Más certificaciones en: <strong class="text-body">Full Stack Python (Skillnest)</strong>, <strong class="text-body">IA para Negocios (PMI)</strong>, <strong class="text-body">MySQL</strong>, <strong class="text-body">HTML</strong> y <strong class="text-body">Servicio al Cliente</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Certificados -->
+    <section id="certificados" class="py-5 py-lg-6">
+        <div class="container-xl">
+            <h2 class="display-5 fw-bold text-center mb-5">
+                <i class="bi bi-award"></i> Certificados de Título
+            </h2>
+            <div class="row g-4 mb-5" id="degreeCertificates">
+                <!-- Miniaturas generadas dinámicamente -->
+            </div>
+
+            <h3 class="fs-4 fw-bold text-center mt-5 mb-4">
+                <i class="bi bi-linkedin"></i> Certificaciones de LinkedIn
+            </h3>
+            
+            <!-- Bootstrap Carousel -->
+            <div id="linkedinCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" id="linkedinCarouselInner">
+                    <!-- Items generados dinámicamente -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#linkedinCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#linkedinCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Footer (Contacto) -->
+    <footer id="contacto" class="bg-dark text-white py-5">
+        <div class="container-xl text-center">
+            <h2 class="display-6 fw-bold mb-3">
+                <i class="bi bi-rocket-takeoff"></i> ¿Listo para escalar la eficiencia operativa con tecnología?
+            </h2>
+            <p class="fs-5 text-light mb-4 contact-footer-max-width">
+                Hablemos sobre cómo mi experiencia híbrida en operaciones y desarrollo puede impulsar tus proyectos.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="mailto:jonathan.matus.vidal@gmail.com" class="btn btn-primary btn-lg px-4 shadow-sm">
+                    <i class="bi bi-envelope"></i> Enviar un Email
+                </a>
+                <a href="https://www.linkedin.com/in/jonathan-matus-logistica/" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-lg px-4">
+                    <i class="bi bi-linkedin"></i> Ver LinkedIn
+                </a>
+            </div>
+            <p class="text-light-emphasis mt-5 small">
+                &copy; 2025 Jonathan Matus Vidal. Construido con Bootstrap 5 & JavaScript.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

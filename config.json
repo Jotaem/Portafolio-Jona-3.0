@@ -1,0 +1,136 @@
+{
+  "name": "Portafolio Profesional Jonathan Matus",
+  "description": "Portafolio profesional moderno con Bootstrap 5, Dark Mode, PDFs interactivos y logos de empresas",
+  "version": "2.0",
+  "lastUpdated": "2025-11-22",
+  "technologies": {
+    "frontend": {
+      "framework": "Bootstrap 5.3",
+      "css": "Custom CSS with CSS Variables",
+      "javascript": "Vanilla JS (ES6+)",
+      "pdf-viewer": "PDF.js 3.11.174",
+      "charts": "Chart.js 4.x"
+    },
+    "icons": "Bootstrap Icons 1.11.0",
+    "fonts": "Google Fonts - Inter"
+  },
+  "features": {
+    "darkMode": {
+      "enabled": true,
+      "persistent": true,
+      "storage": "localStorage"
+    },
+    "pdfCertificates": {
+      "enabled": true,
+      "thumbnails": "Generated with PDF.js",
+      "interactive": true
+    },
+    "companyLogos": {
+      "enabled": true,
+      "locations": ["agrosuper", "pedidosya", "fullify"]
+    },
+    "interactiveElements": {
+      "timeline": true,
+      "hoverCards": true,
+      "smoothScroll": true,
+      "charts": true,
+      "fadeInAnimations": true
+    },
+    "responsive": {
+      "mobile": true,
+      "tablet": true,
+      "desktop": true,
+      "breakpoints": ["xs", "sm", "md", "lg", "xl", "xxl"]
+    }
+  },
+  "sections": [
+    {
+      "id": "inicio",
+      "title": "Inicio",
+      "description": "Hero section con propuesta de valor"
+    },
+    {
+      "id": "sobre-mi",
+      "title": "Sobre Mí",
+      "description": "Presentación personal y fortalezas"
+    },
+    {
+      "id": "proyecto",
+      "title": "Proyecto Estrella",
+      "description": "Case study: LiveOps Engine (AI3)"
+    },
+    {
+      "id": "testimonios",
+      "title": "Prueba Social",
+      "description": "Evaluaciones de liderazgo"
+    },
+    {
+      "id": "evolucion",
+      "title": "Evolución Profesional",
+      "description": "Timeline con logos de empresas"
+    },
+    {
+      "id": "skills",
+      "title": "Skills & Educación",
+      "description": "Stack tecnológico y formación"
+    },
+    {
+      "id": "certificados",
+      "title": "Certificados",
+      "description": "PDFs interactivos de títulos y certificaciones"
+    },
+    {
+      "id": "contacto",
+      "title": "Contacto",
+      "description": "Footer con CTA y enlaces"
+    }
+  ],
+  "colors": {
+    "light": {
+      "primary": "#0d6efd",
+      "secondary": "#6c757d",
+      "success": "#198754",
+      "danger": "#dc3545",
+      "warning": "#ffc107",
+      "info": "#0dcaf0",
+      "background": "#ffffff",
+      "text": "#212529"
+    },
+    "dark": {
+      "background": "#1a1a1a",
+      "text": "#e9ecef",
+      "secondary": "#2d2d2d",
+      "card": "#2d3748"
+    }
+  },
+  "performance": {
+    "optimizations": [
+      "Lazy loading de imágenes",
+      "CSS comprimido",
+      "JavaScript modular",
+      "CDN para librerías externas"
+    ],
+    "bundleSize": "~150 KB (sin pdfs)"
+  },
+  "accessibility": {
+    "wcag": "Level AA",
+    "features": [
+      "Contraste suficiente en ambos temas",
+      "Textos alternativos en imágenes",
+      "Navegación por teclado",
+      "Semántica HTML5"
+    ]
+  },
+  "files": {
+    "html": "index.html",
+    "css": ["css/style.css"],
+    "javascript": ["js/main.js"],
+    "documentation": ["README.md", "config.json"],
+    "utilities": ["generate_thumbnails.py", "organize_files.py"]
+  },
+  "recommendations": {
+    "deployment": ["Vercel (recomendado)", "GitHub Pages", "Netlify"],
+    "browserSupport": ["Chrome 88+", "Firefox 85+", "Safari 14+", "Edge 88+"],
+    "customization": "Editar variables CSS en style.css y datos en main.js"
+  }
+}
