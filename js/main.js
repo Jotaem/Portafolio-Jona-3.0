@@ -299,6 +299,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
+    // ===== INICIAR GENERACIÓN DE MINIATURAS PARA TODOS LOS PDFs =====
+    document.querySelectorAll('.certificate-thumbnail').forEach(thumb => {
+        const pdfPath = thumb.getAttribute('data-pdf');
+        if (pdfPath) {
+            generatePDFThumbnail(pdfPath, thumb);
+        }
+    });
+
     // ===== CERRAR NAVBAR AL HACER CLIC =====
     const navbarToggle = document.querySelector('.navbar-toggler');
     const navbarCollapse = document.querySelector('.navbar-collapse');
