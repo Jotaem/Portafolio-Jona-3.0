@@ -1,7 +1,59 @@
-/* PDF.js Configuration */
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
 document.addEventListener('DOMContentLoaded', async () => {
+
+    // ===== HERO VIDEO BACKGROUND LOOP (DINÁMICO) =====
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) {
+        let videos = [];
+        let currentVideoIndex = 0;
+        
+        // Especificar videos manualmente (escalable)
+        // Los videos se cargarán en orden: hero1, hero2
+        videos = [
+            'assets/videos/hero1.mp4',
+            'assets/videos/hero2.mp4'
+        ];
+        
+        console.log(`✅ Videos cargados para reproducción: ${videos.length} video(s)`);
+        
+        // Función para cambiar video con fade
+        function playNextVideo() {
+            if (videos.length === 0) return;
+            
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            
+            // Fade out
+            heroVideo.classList.add('fade-out');
+            
+            setTimeout(() => {
+                heroVideo.src = videos[currentVideoIndex];
+                heroVideo.play().catch(error => {
+                    console.log('Error reproduciendo video:', error);
+                });
+                heroVideo.classList.remove('fade-out');
+            }, 500);
+        }
+        
+        // Escuchar cuando termina el video actual
+        heroVideo.addEventListener('ended', playNextVideo);
+        
+        // Iniciar con el primer video
+        heroVideo.src = videos[0];
+        heroVideo.play().catch(error => {
+            console.log('Autoplay prevented:', error);
+        });
+    }
+
+    // ===== STICKY NAVBAR ON SCROLL =====
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    }
 
     // ===== DARK MODE TOGGLE =====
     const themeToggle = document.getElementById('themeToggle');
@@ -63,7 +115,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const carouselInner = document.getElementById('linkedinCarouselInner');
     const itemsPerSlide = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
     
-    // Dividir certificados en grupos de 3
+    // Función auxiliar para convertir ruta PDF a ruta de miniatura PNG
+    function getPDFThumbnailPath(pdfPath) {
+        const filename = pdfPath.split('/').pop(); // Obtener nombre del archivo
+        const filenameWithoutExt = filename.replace('.pdf', ''); // Eliminar .pdf
+        return `assets/thumbnails/${filenameWithoutExt}.png`;
+    }
+    
+    // Dividir certificados en grupos de itemsPerSlide
     for (let i = 0; i < certificateData.linkedin.length; i += itemsPerSlide) {
         const slide = document.createElement('div');
         slide.className = i === 0 ? 'carousel-item active' : 'carousel-item';
@@ -71,20 +130,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         const row = document.createElement('div');
         row.className = 'row g-3';
         
-        // Añadir hasta 3 certificados en cada slide
+        // Añadir hasta itemsPerSlide certificados en cada slide
         for (let j = 0; j < itemsPerSlide && i + j < certificateData.linkedin.length; j++) {
             const cert = certificateData.linkedin[i + j];
             const colSize = itemsPerSlide === 1 ? 12 : itemsPerSlide === 2 ? 6 : 4;
+            const thumbnailPath = getPDFThumbnailPath(cert.path);
             
             const col = document.createElement('div');
             col.className = `col-${colSize}`;
             col.innerHTML = `
                 <a href="${cert.path}" target="_blank" class="certificate-link text-decoration-none">
-                    <div class="certificate-thumbnail" data-pdf="${cert.path}">
-                        <div class="certificate-placeholder">
-                            <i class="bi bi-file-pdf"></i>
-                            <p>PDF</p>
-                        </div>
+                    <div class="certificate-thumbnail">
+                        <img src="${thumbnailPath}" alt="${cert.title}" loading="lazy">
                     </div>
                     <p class="certificate-title text-center mt-2">${cert.title}</p>
                 </a>
@@ -97,45 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         carouselInner.appendChild(slide);
     }
 
-    // ===== GENERAR MINIATURAS PDF =====
-    async function generatePDFThumbnail(pdfPath, containerElement) {
-        try {
-            const encodedPdfPath = encodeURI(pdfPath);
-            // Fetch del PDF
-            const pdf = await pdfjsLib.getDocument(encodedPdfPath).promise;
-            const page = await pdf.getPage(1);
-            
-            // Calcular viewport
-            const viewport = page.getViewport({ scale: 1.0 });
-            
-            // Crear canvas
-            const canvas = document.createElement('canvas');
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-            canvas.style.maxWidth = '100%';
-            canvas.style.height = 'auto';
-            
-            const context = canvas.getContext('2d');
-            
-            // Renderizar página
-            await page.render({
-                canvasContext: context,
-                viewport: viewport
-            }).promise;
-            
-            // Reemplazar placeholder con canvas
-            containerElement.innerHTML = '';
-            containerElement.appendChild(canvas);
-            containerElement.style.padding = '4px';
-            containerElement.style.backgroundColor = '#ffffff';
-            
-        } catch (error) {
-            console.debug(`PDF preview no disponible para: ${pdfPath}`);
-            // Mantener el placeholder visual que ya está en el HTML
-        }
-    }
 
-    // ===== GRÁFICOS CHART.JS =====
     const impactCtx = document.getElementById('impactChart')?.getContext('2d');
     const automationCtx = document.getElementById('automationChart')?.getContext('2d');
     
@@ -298,14 +317,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
         });
-    });
-
-    // ===== INICIAR GENERACIÓN DE MINIATURAS PARA TODOS LOS PDFs =====
-    document.querySelectorAll('.certificate-thumbnail').forEach(thumb => {
-        const pdfPath = thumb.getAttribute('data-pdf');
-        if (pdfPath) {
-            generatePDFThumbnail(pdfPath, thumb);
-        }
     });
 
     // ===== CERRAR NAVBAR AL HACER CLIC =====

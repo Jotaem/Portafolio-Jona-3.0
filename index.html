@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jonathan Matus - Ingeniero en Logística & Desarrollador de Soluciones</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    
+    <!-- Open Graph Meta Tags (SEO) -->
+    <meta property="og:title" content="Jonathan Matus - Ingeniero en Logística & Desarrollador de Soluciones">
+    <meta property="og:description" content="Transformando +16 años de experiencia operativa en software de alto impacto. De la bodega al código.">
+    <meta property="og:image" content="https://portafolio-jona.vercel.app/assets/images/hero-poster.jpg">
+    <meta property="og:url" content="https://portafolio-jona.vercel.app">
+    <meta property="og:type" content="website">
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -43,8 +50,16 @@
     </nav>
 
     <!-- 1. Sección Hero -->
-    <section id="inicio" class="py-5 py-lg-6">
-        <div class="container-xl text-center py-5">
+    <section id="inicio" class="py-5 py-lg-6 hero-section">
+        <!-- Background animado con videos -->
+        <div class="hero-video-background">
+            <video class="hero-video" id="heroVideo" autoplay muted playsinline poster="assets/images/hero-poster.jpg">
+                <source src="assets/videos/hero1.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="container-xl text-center py-5 position-relative z-1">
             <h1 class="display-3 fw-bold mb-3 animate-fade-in">
                 JONATHAN MATUS
             </h1>
@@ -56,6 +71,12 @@
                 De la bodega al código.
             </p>
             <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                <a href="#proyecto" class="btn btn-primary btn-lg px-4">
+                    <i class="bi bi-play-circle"></i> Ver Proyectos
+                </a>
+                <a href="#evolucion" class="btn btn-outline-light btn-lg px-4">
+                    <i class="bi bi-timeline"></i> Ver Trayectoria
+                </a>
             </div>
         </div>
     </section>
@@ -72,7 +93,7 @@
                         No soy un desarrollador tradicional. Soy un experto en Operaciones Logísticas que aprendió a programar para resolver problemas reales que las herramientas estándar no cubrían.
                     </p>
                     <p class="fs-5 text-body-secondary mb-3">
-                        Con una trayectoria sólida en empresas como Agrosuper y PedidosYa, evolucioné de gestionar bodegas y flotas a diseñar arquitecturas de software (AI3) que automatizan decisiones críticas en tiempo real. 
+                        Con una trayectoria sólida en empresas como Agrosuper y PedidosYa, evolucioné de gestionar bodegas y flotas a diseñar arquitecturas de software que automatizan decisiones críticas en tiempo real. 
                     </p>
                     <p class="fs-5 text-body fw-semibold">
                         Entiendo el negocio, entiendo el código y, lo más importante, entiendo la urgencia.
@@ -91,14 +112,14 @@
                             <span class="fs-1">🐍</span>
                             <div>
                                 <h3 class="fw-bold fs-5 text-body">Python Developer Autodidacta</h3>
-                                <p class="text-body-secondary mb-0">Creando soluciones con Python, SQL, Selenium y APIs.</p>
+                                <p class="text-body-secondary mb-0">Creando soluciones con Python, SQL, Selenium y AI.</p>
                             </div>
                         </div>
                         <div class="d-flex align-items-start gap-3 p-3 rounded-2 bg-info bg-opacity-10 hover-card">
                             <span class="fs-1">📊</span>
                             <div>
                                 <h3 class="fw-bold fs-5 text-body">Data-Driven Leader</h3>
-                                <p class="text-body-secondary mb-0">Experto en Looker Studio, Grafana y KPIs operativos.</p>
+                                <p class="text-body-secondary mb-0">Experiencia con Looker Studio, Grafana y KPIs operativos.</p>
                             </div>
                         </div>
                     </div>
@@ -423,11 +444,8 @@
                                 <p class="text-body-secondary mb-2">IP Escuela de Comercio de Santiago</p>
                                 <p class="text-success fw-medium small mb-3">Titulado con Distinción Máxima (6.4)</p>
                                 <a href="assets/degree_certificates/Certificado_de_Titulo.pdf" target="_blank" class="certificate-link mt-auto">
-                                    <div class="certificate-thumbnail" data-pdf="assets/degree_certificates/Certificado_de_Titulo.pdf">
-                                        <div class="certificate-placeholder">
-                                            <i class="bi bi-file-pdf"></i>
-                                            <p>Cargando...</p>
-                                        </div>
+                                    <div class="certificate-thumbnail">
+                                        <img src="assets/thumbnails/Certificado_de_Titulo.png" alt="Ingeniería en Logística" loading="lazy">
                                     </div>
                                 </a>
                             </div>
@@ -440,11 +458,8 @@
                                 <p class="text-body-secondary mb-2">U. Playa Ancha / Fundación Telefónica</p>
                                 <p class="text-success fw-medium small mb-3">Calificación 100/100</p>
                                 <a href="assets/degree_certificates/Diplomado_de_Gestion_de_Proyectos.pdf" target="_blank" class="certificate-link mt-auto">
-                                    <div class="certificate-thumbnail" data-pdf="assets/degree_certificates/Diplomado_de_Gestion_de_Proyectos.pdf">
-                                        <div class="certificate-placeholder">
-                                            <i class="bi bi-file-pdf"></i>
-                                            <p>Cargando...</p>
-                                        </div>
+                                    <div class="certificate-thumbnail">
+                                        <img src="assets/thumbnails/Diplomado_de_Gestion_de_Proyectos.png" alt="Diplomado en Gestión de Proyectos" loading="lazy">
                                     </div>
                                 </a>
                             </div>
@@ -457,11 +472,8 @@
                                 <p class="text-body-secondary mb-2">Duoc UC</p>
                                 <p class="text-success fw-medium small mb-3">Nota Titulación 6.2</p>
                                 <a href="assets/degree_certificates/Certificado_de_Titulo_Tecnico_Nivel_Superior.pdf" target="_blank" class="certificate-link mt-auto">
-                                    <div class="certificate-thumbnail" data-pdf="assets/degree_certificates/Certificado_de_Titulo_Tecnico_Nivel_Superior.pdf">
-                                        <div class="certificate-placeholder">
-                                            <i class="bi bi-file-pdf"></i>
-                                            <p>Cargando...</p>
-                                        </div>
+                                    <div class="certificate-thumbnail">
+                                        <img src="assets/thumbnails/Certificado_de_Titulo_Tecnico_Nivel_Superior.png" alt="Técnico Nivel Superior en Gestión Logística" loading="lazy">
                                     </div>
                                 </a>
                             </div>
