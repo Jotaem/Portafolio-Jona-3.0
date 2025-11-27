@@ -111,17 +111,20 @@ html[data-bs-theme="dark"] .navbar-scrolled {
     width: 100%;
     height: 100%;
     z-index: 0;
-    overflow: hidden;
+    overflow: hidden; /* IMPORTANTE: Oculta el excedente del video */
 }
 
 .hero-video {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; /* Asegura que cubra todo */
     object-position: center;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
     background-color: rgba(0, 0, 0, 0.5);
+    
+    /* RECORTE: Zoom al video para ocultar marcas de agua superior/inferior */
+    transform: scale(1.15); 
 }
 
 .hero-video.fade-out {
@@ -146,7 +149,7 @@ html[data-bs-theme="dark"] .navbar-scrolled {
     transition: background 0.3s ease-in-out;
 }
 
-/* Tema dark: overlay más oscuro pero transparente */
+/* Tema dark: overlay más oscuro */
 html[data-bs-theme="dark"] .hero-overlay {
     background: linear-gradient(
         135deg,
@@ -156,7 +159,7 @@ html[data-bs-theme="dark"] .hero-overlay {
     );
 }
 
-/* Tema light: overlay blanco/claro con letras oscuras */
+/* Tema light: overlay blanco/claro */
 html[data-bs-theme="light"] .hero-overlay {
     background: linear-gradient(
         135deg,
@@ -187,24 +190,6 @@ html[data-bs-theme="light"] #inicio p {
     #inicio {
         min-height: 500px;
     }
-    
-    html[data-bs-theme="dark"] .hero-overlay {
-        background: linear-gradient(
-            135deg,
-            rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.7) 50%,
-            rgba(0, 0, 0, 0.8) 100%
-        );
-    }
-    
-    html[data-bs-theme="light"] .hero-overlay {
-        background: linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.7) 0%,
-            rgba(255, 255, 255, 0.6) 50%,
-            rgba(255, 255, 255, 0.7) 100%
-        );
-    }
 }
 
 /* ===== CARDS INTERACTIVAS ===== */
@@ -228,16 +213,6 @@ html[data-bs-theme="light"] .hover-item:hover {
 
 html[data-bs-theme="dark"] .hover-item:hover {
     background-color: #2d3748;
-}
-
-/* ===== BOTONES CON EFECTO LIFT ===== */
-.hover-lift {
-    transition: transform var(--transition-duration), box-shadow var(--transition-duration);
-}
-
-.hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* ===== GRÁFICOS ===== */
@@ -353,42 +328,33 @@ html[data-bs-theme="dark"] .company-logo:hover {
     filter: brightness(1.1);
 }
 
-/* ===== BOOTSTRAP CAROUSEL ===== */
-#linkedinCarousel {
-    padding: 2rem 0;
+/* ===== BOOTSTRAP CAROUSEL (LINKEDIN & REVIEWS) ===== */
+#linkedinCarousel, #reviewsCarousel {
+    padding: 1rem 0;
 }
 
 .carousel-inner {
     border-radius: 8px;
-    overflow: hidden;
-    padding: 0 50px;
+    overflow: visible; /* Permitir sombras fuera */
+    padding: 10px 50px; /* Padding lateral para las flechas */
 }
 
 .carousel-item {
-    padding: 2rem 0;
+    padding: 1rem 0;
+    transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out; /* Transición más lenta */
 }
 
+/* Estilos de controles (flechas) */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: rgba(13, 110, 253, 0.7);
     border-radius: 50%;
     padding: 12px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.carousel-control-prev-icon::after,
-.carousel-control-next-icon::after {
-    display: none;
-}
-
-.carousel-control-prev-icon::before,
-.carousel-control-next-icon::before {
-    content: '';
-    display: block;
 }
 
 .carousel-control-prev:hover .carousel-control-prev-icon,
@@ -396,45 +362,12 @@ html[data-bs-theme="dark"] .company-logo:hover {
     background-color: rgba(13, 110, 253, 1);
 }
 
-
-.carousel-control-prev:focus,
-.carousel-control-next:focus {
-    outline: none;
-    box-shadow: none;
-    border: none;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-    opacity: 1;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    background: none;
-    border: none;
-}
-
-.carousel-control-prev {
-    left: 0;
-}
-
-.carousel-control-next {
-    right: 0;
-}
-
 html[data-bs-theme="dark"] .carousel-control-prev-icon,
 html[data-bs-theme="dark"] .carousel-control-next-icon {
     background-color: rgba(13, 110, 253, 0.8);
 }
 
-/* Transición de desvanecimiento más suave para el carrusel */
-#linkedinCarousel.carousel-fade .carousel-item {
-    transition: opacity 1.2s ease-in-out;
-}
-
-
-/* ===== CARRUSEL RESPONSIVE ===== */
+/* CARRUSEL RESPONSIVE */
 @media (max-width: 992px) {
     .carousel-inner {
         padding: 0 40px;
@@ -443,20 +376,11 @@ html[data-bs-theme="dark"] .carousel-control-next-icon {
 
 @media (max-width: 768px) {
     .carousel-inner {
-        padding: 0 30px;
+        padding: 0 20px;
     }
-    
     .carousel-control-prev,
     .carousel-control-next {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        padding: 8px;
-        width: 40px;
-        height: 40px;
+        width: 30px;
     }
 }
 
@@ -472,7 +396,7 @@ html[data-bs-theme="dark"] .carousel-control-next-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 220px;
+    min-height: 200px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     border: 1px solid rgba(0, 0, 0, 0.08);
 }
@@ -497,38 +421,7 @@ html[data-bs-theme="dark"] .certificate-thumbnail:hover {
     height: 100%;
     object-fit: cover;
     border-radius: 6px;
-    padding: 4px;
-    box-sizing: border-box;
-}
-
-.certificate-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    color: #6c757d;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-html[data-bs-theme="dark"] .certificate-placeholder {
-    color: #adb5bd;
-}
-
-.certificate-placeholder i {
-    font-size: 4rem;
-    opacity: 0.5;
-}
-
-.certificate-placeholder p {
-    margin: 0;
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
+    padding: 0;
 }
 
 .certificate-link {
@@ -575,7 +468,6 @@ html[data-bs-theme="dark"] .badge:hover {
     background-color: #FD7E14 !important;
     color: #ffffff !important;
 }
-
 
 /* ===== SECCIONES ===== */
 section {
@@ -624,15 +516,12 @@ footer {
     .timeline {
         padding-left: 1rem;
     }
-    
     .timeline::before {
         left: -4px;
     }
-    
     .timeline-marker {
         left: -12px;
     }
-    
     .timeline-item:hover .timeline-marker {
         left: -15px;
     }
@@ -664,4 +553,98 @@ html[data-bs-theme="dark"] .text-light {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* ===== INFINITE SLIDER (TESTIMONIOS) ===== */
+.infinite-slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+    /* Efecto de desvanecimiento en los bordes para suavidad */
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.infinite-slider-track {
+    display: flex;
+    gap: 30px; /* Espacio entre tarjetas */
+    width: max-content; /* El ancho se ajusta al contenido */
+    animation: scroll 40s linear infinite; /* 40s es la velocidad, ajústalo a tu gusto */
+}
+
+/* Pausar animación al pasar el mouse */
+.infinite-slider-track:hover {
+    animation-play-state: paused;
+}
+
+/* La tarjeta individual dentro del slider */
+.review-card {
+    width: 400px; /* Ancho fijo para cada tarjeta */
+    flex-shrink: 0; /* Evita que se encojan */
+    white-space: normal; /* Permite que el texto salte de línea */
+}
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+    .review-card {
+        width: 300px;
+    }
+}
+
+/* La animación clave */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Se mueve el 50% porque duplicaremos el contenido */
+    }
+}
+
+/* ===== INFINITE SLIDER (COMÚN) ===== */
+.infinite-slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+    /* Efecto fade en los bordes */
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.infinite-slider-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    /* CAMBIO DE VELOCIDAD AQUÍ: De 40s a 80s */
+    animation: scroll 80s linear infinite; 
+}
+
+.infinite-slider-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ESTILOS ESPECÍFICOS: Reviews */
+.review-card {
+    width: 400px;
+    flex-shrink: 0;
+    white-space: normal;
+}
+
+/* ESTILOS ESPECÍFICOS: Certificados */
+.cert-slide-item {
+    width: 280px; /* Ancho ideal para miniaturas verticales */
+    flex-shrink: 0;
+}
+
+/* Ajustes Responsive */
+@media (max-width: 768px) {
+    .review-card { width: 300px; }
+    .cert-slide-item { width: 220px; }
 }

@@ -1,49 +1,48 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // ===== HERO VIDEO BACKGROUND LOOP (DINÁMICO) =====
-    const heroVideo = document.getElementById('heroVideo');
-    if (heroVideo) {
-        let videos = [];
-        let currentVideoIndex = 0;
-        
-        // Especificar videos manualmente (escalable)
-        // Los videos se cargarán en orden: hero1, hero2
-        videos = [
-            'assets/videos/hero1.mp4',
-            'assets/videos/hero2.mp4'
-        ];
-        
-        console.log(`✅ Videos cargados para reproducción: ${videos.length} video(s)`);
-        
-        // Función para cambiar video con fade
-        function playNextVideo() {
-            if (videos.length === 0) return;
-            
-            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-            
-            // Fade out
-            heroVideo.classList.add('fade-out');
-            
-            setTimeout(() => {
-                heroVideo.src = videos[currentVideoIndex];
-                heroVideo.play().catch(error => {
-                    console.log('Error reproduciendo video:', error);
-                });
-                heroVideo.classList.remove('fade-out');
-            }, 500);
-        }
-        
-        // Escuchar cuando termina el video actual
-        heroVideo.addEventListener('ended', playNextVideo);
-        
-        // Iniciar con el primer video
-        heroVideo.src = videos[0];
-        heroVideo.play().catch(error => {
-            console.log('Autoplay prevented:', error);
-        });
+    // =========================================================
+    // 1. CONFIGURACIÓN GENERAL Y UTILIDADES
+    // =========================================================
+
+    // Función auxiliar para obtener ruta de miniaturas
+    function getPDFThumbnailPath(pdfPath) {
+        const filename = pdfPath.split('/').pop(); 
+        const filenameWithoutExt = filename.replace('.pdf', ''); 
+        return `assets/thumbnails/${filenameWithoutExt}.png`;
     }
 
-    // ===== STICKY NAVBAR ON SCROLL =====
+    // Toggle Modo Oscuro / Claro
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElement.setAttribute('data-bs-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+    
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            htmlElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+            if (typeof updateCharts === 'function') updateCharts(newTheme);
+        });
+    }
+    
+    function updateThemeIcon(theme) {
+        if (!themeToggle) return;
+        const icon = themeToggle.querySelector('i');
+        if (theme === 'dark') {
+            icon.classList.remove('bi-moon-fill');
+            icon.classList.add('bi-sun-fill');
+        } else {
+            icon.classList.remove('bi-sun-fill');
+            icon.classList.add('bi-moon-fill');
+        }
+    }
+
+    // Navbar Sticky & Smooth Scroll
     const navbar = document.getElementById('navbar');
     if (navbar) {
         window.addEventListener('scroll', () => {
@@ -55,110 +54,179 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // ===== DARK MODE TOGGLE =====
-    const themeToggle = document.getElementById('themeToggle');
-    const htmlElement = document.documentElement;
-    
-    // Cargar tema guardado o usar default (light)
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    htmlElement.setAttribute('data-bs-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-    
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-bs-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        htmlElement.setAttribute('data-bs-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-        updateCharts(newTheme);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            if (this.hash !== "") {
+                e.preventDefault();
+                const hash = this.hash;
+                const targetElement = document.querySelector(hash);
+                if(targetElement) {
+                    const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                }
+            }
+        });
     });
-    
-    function updateThemeIcon(theme) {
-        const icon = themeToggle.querySelector('i');
-        if (theme === 'dark') {
-            icon.classList.remove('bi-moon-fill');
-            icon.classList.add('bi-sun-fill');
-        } else {
-            icon.classList.remove('bi-sun-fill');
-            icon.classList.add('bi-moon-fill');
+
+    // Cerrar menú móvil al hacer click
+    const navbarToggle = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    document.querySelectorAll('.navbar-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navbarToggle && navbarCollapse && window.innerWidth < 992) {
+                navbarToggle.click();
+            }
+        });
+    });
+
+    // =========================================================
+    // 2. HERO VIDEO LOOP
+    // =========================================================
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) {
+        let videos = ['assets/videos/hero1.mp4', 'assets/videos/hero2.mp4'];
+        let currentVideoIndex = 0;
+        
+        function playNextVideo() {
+            if (videos.length === 0) return;
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            heroVideo.classList.add('fade-out');
+            setTimeout(() => {
+                heroVideo.src = videos[currentVideoIndex];
+                heroVideo.play().catch(e => console.log('Error play:', e));
+                heroVideo.classList.remove('fade-out');
+            }, 500);
         }
+        
+        heroVideo.addEventListener('ended', playNextVideo);
+        // Intentar reproducir el primero
+        heroVideo.play().catch(e => console.log('Autoplay prevented:', e));
     }
 
-    // ===== DATA DE CERTIFICADOS (Ordenados lógicamente) =====
+    // =========================================================
+    // 3. DATOS (DATA)
+    // =========================================================
+    
     const certificateData = {
-        degree: [
-            { path: 'assets/degree_certificates/Certificado de Titulo Tecnico Nivel Superior.pdf', title: 'Título Técnico Nivel Superior' },
-            { path: 'assets/degree_certificates/Certificado de Titulo.pdf', title: 'Título Profesional' },
-            { path: 'assets/degree_certificates/Diplomado de Gestion de Proyectos.pdf', title: 'Diplomado en Gestión de Proyectos' }
-        ],
         linkedin: [
-            // Python (especialización)
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_Python esencial.pdf', title: 'Python Esencial' },
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_Domina Python.pdf', title: 'Domina Python' },
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_Python avanzado.pdf', title: 'Python Avanzado' },
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_Python avanzado 2.pdf', title: 'Python Avanzado 2' },
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_Python Errores comunes y como solucionarlos.pdf', title: 'Python: Errores Comunes' },
-            // Desarrollo Web
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_HTML esencial.pdf', title: 'HTML Esencial' },
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_Fundamentos del desarrollo web Full Stack o Frontend.pdf', title: 'Fundamentos del Desarrollo Web' },
-            // Bases de Datos
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_Aprende diseno de base de datos relacionales.pdf', title: 'Diseño de Bases de Datos' },
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_Fundamentos de la programacion Bases de datos.pdf', title: 'Fundamentos: Bases de Datos' },
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_MySQL esencial.pdf', title: 'MySQL Esencial' },
-            // Habilidades
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_Empodera a tu equipo con la inteligencia artificial.pdf', title: 'Empodera a tu Equipo con IA' },
             { path: 'assets/linkedin_certificates/CertificadoDeFinalizacion_Conviertete en especialista de servicio al cliente.pdf', title: 'Especialista de Servicio al Cliente' }
         ]
     };
 
-    // ===== BOOTSTRAP CAROUSEL LINKEDIN =====
-    const carouselInner = document.getElementById('linkedinCarouselInner');
-    const itemsPerSlide = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-    
-    // Función auxiliar para convertir ruta PDF a ruta de miniatura PNG
-    function getPDFThumbnailPath(pdfPath) {
-        const filename = pdfPath.split('/').pop(); // Obtener nombre del archivo
-        const filenameWithoutExt = filename.replace('.pdf', ''); // Eliminar .pdf
-        return `assets/thumbnails/${filenameWithoutExt}.png`;
+    const reviewsData = [
+        {
+            text: "Desde tu llegada visualizaste cómo funciona una compañía con una fuerte dinámica de cambio. Eres un verdadero analista, siempre tomando opinión basada en datos. <strong class='text-primary'>Mi estrategia para este semestre fue liberar todo tu potencial y disponer de tus conocimientos en pro del territorio, trabajo que has hecho de manera contundente.</strong>",
+            title: "Evaluación Anual de Desempeño",
+            subtitle: "End-Year 2022",
+            link: "assets/performance_reviews/Performance_2022_endyear.pdf"
+        },
+        {
+            text: "Te felicito por tu profundo analisis y aporte de información al equipo. Gracias <strong class='text-primary'>a tu agudo sentido crítico, tu agilidad cuando se te solicita alguna tarea e ir más allá de lo que se te pide, te convierten en una pieza fundamental.</strong>",
+            title: "Evaluación de Desempeño",
+            subtitle: "Mid-Year 2023",
+            link: "assets/performance_reviews/Performance_2023_midyear.pdf"
+        },
+        {
+            text: "Tienes la capacidad de poder identificar desviaciones o problemas que pueden llegar a ser imperceptibles para algunos, lo que demuestra <strong class='text-primary'>tu entendimiento y deseo de querer ir más al detalle para alcanzar buenos resultados.</strong>",
+            title: "Evaluación Anual de Desempeño",
+            subtitle: "End-Year 2023",
+            link: "assets/performance_reviews/Performance_2023_endyear.pdf"
+        },
+        {
+            text: "Has logrado consolidar el modelo de funcionamiento del equipo, siendo <strong class='text-primary'>un referente técnico para ellos y un líder consistente</strong> que ha facilitado la implementación exitosa de las herramientas de trabajo. A la vez que has demostrado un <strong class='text-primary'>espíritu de mejora continua y crecimiento.</strong>",
+            title: "Evaluación de Desempeño",
+            subtitle: "Mid-Year 2024",
+            link: "assets/performance_reviews/Performance_2024_midyear.pdf"
+        },
+        {
+            text: "Este año has sido el responsable de concretar gran parte de las expectativas de desarrollo y evolución... pasar de la debilidad de los protocolos a ser hoy precisamente una fortaleza de tu equipo. <strong class='text-primary'>No hubiera sido posible llevar este desafío con tal nivel de orden, estrategia y autonomía con ninguna otra persona del equipo</strong>.",
+            title: "Evaluación Anual de Desempeño",
+            subtitle: "End-Year 2024",
+            link: "assets/performance_reviews/Performance_2024_endyear.pdf"
+        },
+        {
+            text: "Eres un <strong class='text-primary'>ejemplo sostenido de perseverancia, intencionalidad y mentalidad de crecimiento.</strong> Has trabajado con disciplina para desarrollar tu seniority y fortalecer tu liderazgo. Este compromiso personal se traduce en una <strong class='text-primary'>cultura de mejora continua que has sabido irradiar al equipo.</strong>",
+            title: "Evaluación de Desempeño",
+            subtitle: "Mid-Year 2025",
+            link: "assets/performance_reviews/Performance_2025_midyear.pdf"
+        }
+    ];
+
+    // =========================================================
+    // 4. INFINITE SLIDERS (TESTIMONIOS & LINKEDIN)
+    // =========================================================
+
+    // A. Renderizar REVIEWS (Testimonios)
+    const reviewsTrack = document.getElementById('reviewsTrack');
+    if (reviewsTrack) {
+        const createReviewCard = (review) => `
+            <div class="review-card">
+                <div class="card h-100 shadow-sm border-0 hover-card p-4">
+                    <div class="card-body d-flex flex-column">
+                        <blockquote class="fs-6 text-body mb-4 flex-grow-1" style="font-style: italic;">
+                            "${review.text}"
+                        </blockquote>
+                        <div class="mt-auto border-top pt-3">
+                            <a href="${review.link}" target="_blank" class="text-decoration-none d-block">
+                                <div class="fw-bold text-primary mb-1">${review.title}</div>
+                                <div class="text-body-secondary small"><i class="bi bi-calendar-event"></i> ${review.subtitle}</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const reviewsHTML = reviewsData.map(r => createReviewCard(r)).join('');
+        // Duplicar contenido para efecto infinito
+        reviewsTrack.innerHTML = reviewsHTML + reviewsHTML;
     }
-    
-    // Dividir certificados en grupos de itemsPerSlide
-    for (let i = 0; i < certificateData.linkedin.length; i += itemsPerSlide) {
-        const slide = document.createElement('div');
-        slide.className = i === 0 ? 'carousel-item active' : 'carousel-item';
-        
-        const row = document.createElement('div');
-        row.className = 'row g-3';
-        
-        // Añadir hasta itemsPerSlide certificados en cada slide
-        for (let j = 0; j < itemsPerSlide && i + j < certificateData.linkedin.length; j++) {
-            const cert = certificateData.linkedin[i + j];
-            const colSize = itemsPerSlide === 1 ? 12 : itemsPerSlide === 2 ? 6 : 4;
+
+    // B. Renderizar LINKEDIN (Certificados)
+    const linkedinTrack = document.getElementById('linkedinTrack');
+    if (linkedinTrack && certificateData.linkedin) {
+        const createCertCard = (cert) => {
             const thumbnailPath = getPDFThumbnailPath(cert.path);
-            
-            const col = document.createElement('div');
-            col.className = `col-${colSize}`;
-            col.innerHTML = `
+            return `
+            <div class="cert-slide-item">
                 <a href="${cert.path}" target="_blank" class="certificate-link text-decoration-none">
-                    <div class="certificate-thumbnail">
+                    <div class="certificate-thumbnail mb-3">
                         <img src="${thumbnailPath}" alt="${cert.title}" loading="lazy">
                     </div>
-                    <p class="certificate-title text-center mt-2">${cert.title}</p>
+                    <p class="certificate-title text-center small fw-semibold px-2">${cert.title}</p>
                 </a>
+            </div>
             `;
-            
-            row.appendChild(col);
-        }
-        
-        slide.appendChild(row);
-        carouselInner.appendChild(slide);
+        };
+
+        const certsHTML = certificateData.linkedin.map(c => createCertCard(c)).join('');
+        // Duplicar contenido para efecto infinito
+        linkedinTrack.innerHTML = certsHTML + certsHTML;
     }
 
-
-    const impactCtx = document.getElementById('impactChart')?.getContext('2d');
-    const automationCtx = document.getElementById('automationChart')?.getContext('2d');
+    // =========================================================
+    // 5. CHART.JS LOGIC
+    // =========================================================
+    const impactCanvas = document.getElementById('impactChart');
+    const automationCanvas = document.getElementById('automationChart');
     
-    if (impactCtx && automationCtx) {
+    if (impactCanvas && automationCanvas) {
+        const impactCtx = impactCanvas.getContext('2d');
+        const automationCtx = automationCanvas.getContext('2d');
+
         const impactChartData = {
             labels: ['2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01', '2025-02', '2025-03', '2025-04', '2025-05', '2025-06', '2025-07', '2025-08', '2025-09', '2025-10', '2025-11'],
             datasets: [{
@@ -174,16 +242,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const automationChartData = {
             labels: ['2025-08', '2025-09', '2025-10', '2025-11'],
             datasets: [
-                {
-                    label: 'Gestión Manual',
-                    data: [6000, 3000, 2800, 1700],
-                    backgroundColor: '#6c757d',
-                },
-                {
-                    label: 'Gestión Automática (AI3)',
-                    data: [3100, 3500, 7400, 8000],
-                    backgroundColor: '#dc3545',
-                }
+                { label: 'Gestión Manual', data: [6000, 3000, 2800, 1700], backgroundColor: '#6c757d' },
+                { label: 'Gestión Automática (AI3)', data: [3100, 3500, 7400, 8000], backgroundColor: '#dc3545' }
             ]
         };
 
@@ -197,58 +257,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: ticksColor,
-                            font: { family: 'Inter' }
-                        },
-                        grid: { color: gridColor }
-                    },
-                    x: {
-                        ticks: {
-                            color: ticksColor,
-                            font: { family: 'Inter' }
-                        },
-                        grid: { display: false }
-                    }
+                    y: { beginAtZero: true, ticks: { color: ticksColor }, grid: { color: gridColor } },
+                    x: { ticks: { color: ticksColor }, grid: { display: false } }
                 },
                 plugins: {
-                    legend: {
-                        labels: {
-                            color: legendColor,
-                            font: { family: 'Inter', size: 14 }
-                        }
-                    },
-                    tooltip: {
-                        enabled: true,
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        titleFont: { family: 'Inter', size: 16 },
-                        bodyFont: { family: 'Inter', size: 14 },
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) label += ': ';
-                                if (context.parsed.y !== null) {
-                                    label += new Intl.NumberFormat('es-CL').format(context.parsed.y);
-                                }
-                                return label;
-                            }
-                        }
-                    }
+                    legend: { labels: { color: legendColor, font: { family: 'Inter', size: 14 } } },
+                    tooltip: { enabled: true, backgroundColor: 'rgba(0, 0, 0, 0.8)' }
                 }
             };
         };
 
         let impactChart, automationChart;
 
-        function updateCharts(theme) {
-            if (impactChart) {
-                impactChart.destroy();
-            }
-            if (automationChart) {
-                automationChart.destroy();
-            }
+        window.updateCharts = function(theme) {
+            if (impactChart) impactChart.destroy();
+            if (automationChart) automationChart.destroy();
 
             impactChart = new Chart(impactCtx, {
                 type: 'bar',
@@ -268,67 +291,33 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 }
             });
-        }
+        };
 
+        // Inicializar gráficos
         updateCharts(savedTheme);
 
-        // Cambiar entre gráficos
+        // Lógica de botones para cambiar gráfico
         const showImpactBtn = document.getElementById('showImpactChart');
         const showAutomationBtn = document.getElementById('showAutomationChart');
-        const impactCanvas = document.getElementById('impactChart');
-        const automationCanvas = document.getElementById('automationChart');
 
-        showImpactBtn?.addEventListener('click', () => {
-            impactCanvas.classList.remove('d-none');
-            automationCanvas.classList.add('d-none');
-            showImpactBtn.classList.add('active-chart-btn');
-            showImpactBtn.classList.remove('inactive-chart-btn');
-            showAutomationBtn.classList.add('inactive-chart-btn');
-            showAutomationBtn.classList.remove('active-chart-btn');
-        });
+        if(showImpactBtn && showAutomationBtn) {
+            showImpactBtn.addEventListener('click', () => {
+                impactCanvas.classList.remove('d-none');
+                automationCanvas.classList.add('d-none');
+                showImpactBtn.classList.add('active-chart-btn');
+                showImpactBtn.classList.remove('inactive-chart-btn');
+                showAutomationBtn.classList.add('inactive-chart-btn');
+                showAutomationBtn.classList.remove('active-chart-btn');
+            });
 
-        showAutomationBtn?.addEventListener('click', () => {
-            impactCanvas.classList.add('d-none');
-            automationCanvas.classList.remove('d-none');
-            showAutomationBtn.classList.add('active-chart-btn');
-            showAutomationBtn.classList.remove('inactive-chart-btn');
-            showImpactBtn.classList.add('inactive-chart-btn');
-            showImpactBtn.classList.remove('active-chart-btn');
-        });
+            showAutomationBtn.addEventListener('click', () => {
+                impactCanvas.classList.add('d-none');
+                automationCanvas.classList.remove('d-none');
+                showAutomationBtn.classList.add('active-chart-btn');
+                showAutomationBtn.classList.remove('inactive-chart-btn');
+                showImpactBtn.classList.add('inactive-chart-btn');
+                showImpactBtn.classList.remove('active-chart-btn');
+            });
+        }
     }
-
-    // ===== SMOOTH SCROLL PARA NAVBAR =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            if (this.hash !== "") {
-                e.preventDefault();
-                const hash = this.hash;
-                const targetElement = document.querySelector(hash);
-                if(targetElement) {
-                    const navbar = document.getElementById('navbar');
-                    const navbarHeight = navbar ? navbar.offsetHeight : 0;
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-                    
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
-            }
-        });
-    });
-
-    // ===== CERRAR NAVBAR AL HACER CLIC =====
-    const navbarToggle = document.querySelector('.navbar-toggler');
-    const navbarCollapse = document.querySelector('.navbar-collapse');
-    
-    document.querySelectorAll('.navbar-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navbarToggle && navbarCollapse) {
-                navbarToggle.click();
-            }
-        });
-    });
-
 });
