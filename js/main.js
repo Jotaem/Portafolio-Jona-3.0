@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             link: "assets/performance_reviews/Performance_2022_endyear.pdf"
         },
         {
-            text: "Te felicito por tu profundo analisis y aporte de información al equipo. Gracias <strong class='text-primary'>a tu agudo sentido crítico, tu agilidad cuando se te solicita alguna tarea e ir más allá de lo que se te pide, te convierten en una pieza fundamental.</strong>",
+            text: "Te felicito por tu profundo analisis y aporte de información al equipo. Gracias <strong class='text-primary'>a tu agudo sentido crítico, tu agilidad cuando se te solicita alguna tarea e ir más allá de lo que se te pide, te has convertido en una pieza fundamental.</strong>",
             title: "Evaluación de Desempeño",
             subtitle: "Mid-Year 2023",
             link: "assets/performance_reviews/Performance_2023_midyear.pdf"
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             link: "assets/performance_reviews/Performance_2024_midyear.pdf"
         },
         {
-            text: "Este año has sido el responsable de concretar gran parte de las expectativas de desarrollo y evolución... pasar de la debilidad de los protocolos a ser hoy precisamente una fortaleza de tu equipo. <strong class='text-primary'>No hubiera sido posible llevar este desafío con tal nivel de orden, estrategia y autonomía con ninguna otra persona del equipo</strong>.",
+            text: "Este año has sido el responsable de concretar gran parte de las expectativas de desarrollo y evolución del equipo... pasar de la debilidad de los protocolos a ser hoy precisamente una fortaleza de tu equipo. <strong class='text-primary'>No hubiera sido posible llevar este desafío con tal nivel de orden, estrategia y autonomía con ninguna otra persona del equipo</strong>.",
             title: "Evaluación Anual de Desempeño",
             subtitle: "End-Year 2024",
             link: "assets/performance_reviews/Performance_2024_endyear.pdf"
@@ -217,6 +217,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         linkedinTrack.innerHTML = certsHTML + certsHTML;
     }
 
+    // C. Renderizar STACK (Carrusel 3D)
+    function setup3DCarousel(carouselId) {
+        const carousel = document.getElementById(carouselId);
+        if (!carousel) return;
+
+        const items = carousel.querySelectorAll('.carousel-3d-item');
+        const numItems = items.length;
+        if (numItems === 0) return;
+
+        const angle = 360 / numItems;
+        // El radio (translateZ) depende del número de elementos y su ancho
+        // Esta es una fórmula aproximada, se puede ajustar
+        const radius = Math.round((items[0].offsetWidth / 2) / Math.tan(Math.PI / numItems));
+
+        items.forEach((item, i) => {
+            const rotation = i * angle;
+            item.style.transform = `rotateY(${rotation}deg) translateZ(${radius}px)`;
+        });
+    }
+
+    // Inicializar ambos carruseles
+    setup3DCarousel('analysisCarousel');
+    setup3DCarousel('developmentCarousel');
+
     // =========================================================
     // 5. CHART.JS LOGIC
     // =========================================================
@@ -231,7 +255,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             labels: ['2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01', '2025-02', '2025-03', '2025-04', '2025-05', '2025-06', '2025-07', '2025-08', '2025-09', '2025-10', '2025-11'],
             datasets: [{
                 label: 'Órdenes Gestionadas',
-                data: [1700, 2500, 2400, 2300, 2900, 2800, 2100, 1500, 1600, 1500, 1300, 1600, 1700, 3700, 4500, 5200, 9100, 6500, 10200, 9700],
+                data: [1700, 2500, 2400, 2300, 2900, 2800, 2100, 1500, 1600, 1500, 1300, 1600, 1700, 3700, 4500, 5200, 9100, 6500, 10200, 15200],
                 backgroundColor: '#0d6efd',
                 borderColor: '#0056b3',
                 borderWidth: 1,
@@ -242,15 +266,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         const automationChartData = {
             labels: ['2025-08', '2025-09', '2025-10', '2025-11'],
             datasets: [
-                { label: 'Gestión Manual', data: [6000, 3000, 2800, 1700], backgroundColor: '#6c757d' },
-                { label: 'Gestión Automática (AI3)', data: [3100, 3500, 7400, 8000], backgroundColor: '#dc3545' }
+                { label: 'Gestión Manual', data: [4700, 3000, 2800, 2700], backgroundColor: '#6c757d' },
+                { label: 'Gestión Automática (AI3)', data: [4400, 3500, 7400, 12500], backgroundColor: '#dc3545' }
             ]
         };
 
         const getChartOptions = (theme) => {
             const isDark = theme === 'dark';
             const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-            const ticksColor = isDark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)';
+            const ticksColor = '#000000';
             const legendColor = isDark ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.8)';
 
             return {

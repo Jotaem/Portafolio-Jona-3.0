@@ -9,6 +9,11 @@
     --light-color: #f8f9fa;
     --dark-color: #212529;
     --transition-duration: 0.3s;
+
+    /* VARIABLES PARA EL GRADIENTE ANIMADO (Modo Claro/Default) */
+    --banner-gradient-start: #0d6efd; /* Azul Bootstrap */
+    --banner-gradient-mid: #6610f2;   /* Indigo */
+    --banner-gradient-end: #0dcaf0;   /* Cian */
 }
 
 /* ===== BODY Y TEMAS ===== */
@@ -31,6 +36,11 @@ html[data-bs-theme="dark"] {
     --bs-emphasis-color: #fff;
     --bs-tertiary-bg: #2d2d2d;
     --bs-tertiary-color: #b0b0b0;
+
+    /* VARIABLES PARA EL GRADIENTE ANIMADO (Modo Oscuro - Tonos más profundos) */
+    --banner-gradient-start: #06357a; 
+    --banner-gradient-mid: #2d0a75;
+    --banner-gradient-end: #055160;
 }
 
 /* ===== ANIMACIONES ===== */
@@ -647,4 +657,117 @@ html[data-bs-theme="dark"] .text-light {
 @media (max-width: 768px) {
     .review-card { width: 300px; }
     .cert-slide-item { width: 220px; }
+}
+
+/* =========================================================
+/* NUEVA SECCIÓN: CARRUSEL 3D (SKILLS)
+/* ========================================================= */
+
+.carousel-3d-scene {
+    position: relative;
+    width: 210px;
+    height: 140px;
+    margin: 80px auto;
+    perspective: 1000px;
+}
+
+.carousel-3d {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: rotateCarousel 30s linear infinite;
+    cursor: grab;
+}
+
+.carousel-3d:hover {
+    animation-play-state: paused;
+}
+
+@keyframes rotateCarousel {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+.carousel-3d-item {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 190px;
+    height: 120px;
+    background: var(--bs-body-bg);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    backface-visibility: hidden; /* Oculta la cara trasera */
+    transition: background-color var(--transition-duration), border-color var(--transition-duration);
+}
+
+html[data-bs-theme="dark"] .carousel-3d-item {
+    background: var(--bs-tertiary-bg);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.carousel-3d-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    transition: filter var(--transition-duration);
+}
+
+.carousel-3d-item p {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--bs-secondary-color);
+    margin: 0;
+}
+
+/* Manejo del Dark Mode para los Logos (INVERSIÓN) */
+html[data-bs-theme="dark"] .carousel-3d-item img {
+    filter: invert(0.8) hue-rotate(180deg) brightness(1.2) contrast(1.1);
+}
+
+/* Excluir logos que ya son claros o se ven mal invertidos */
+html[data-bs-theme="dark"] .carousel-3d-item img[alt*="Bootstrap"],
+html[data-bs-theme="dark"] .carousel-3d-item img[alt*="BigQuery"],
+html[data-bs-theme="dark"] .carousel-3d-item img[alt*="JavaScript"] {
+    filter: none;
+}
+
+/* =========================================================
+/* NUEVA SECCIÓN: BANNER ANIMADO & EXTRAS
+/* ========================================================= */
+
+/* Animación del Gradiente */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Banner Gradiente Animado (LiveOps) */
+.banner-container {
+    padding: 4rem 1rem; /* Ajustado para que tenga buen alto como Hero */
+    text-align: center;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    /* Usa las variables del banner */
+    background: linear-gradient(90deg, var(--banner-gradient-start), var(--banner-gradient-mid), var(--banner-gradient-end));
+    background-size: 300% 300%; /* Aumentado para que el movimiento sea fluido */
+    animation: gradientShift 12s ease infinite alternate;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Switch de Bootstrap personalizado (según tu snippet) */
+.form-check-input {
+    width: 3em; 
+    height: 1.5em;
+    cursor: pointer;
 }
