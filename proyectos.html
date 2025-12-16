@@ -31,7 +31,7 @@
                 <button class="btn btn-sm btn-outline-secondary me-2" id="themeToggle" title="Alternar tema">
                     <i class="bi bi-moon-fill"></i>
                 </button>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" title="Alternar navegación">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -46,9 +46,31 @@
         </div>
     </nav>
 
+    <!-- Sistema de Pestañas (Tabs) -->
+    <nav class="py-4 bg-body border-bottom sticky-top project-nav-pills">
+        <div class="container-xl">
+            <ul class="nav nav-pills justify-content-center gap-3 project-pills" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active rounded-pill px-4" id="pills-laboral-tab" data-bs-toggle="pill" data-bs-target="#pills-laboral" type="button" role="tab" aria-controls="pills-laboral" aria-selected="true">
+                        <i class="bi bi-briefcase-fill me-2"></i> Proyecto Laboral
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4" id="pills-academico-tab" data-bs-toggle="pill" data-bs-target="#pills-academico" type="button" role="tab" aria-controls="pills-academico" aria-selected="false">
+                        <i class="bi bi-mortarboard-fill me-2"></i> Proyectos Académicos
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <main>
-        <!-- 1. Header del Proyecto -->
-        <section class="banner-container">
+        <!-- Sistema de Contenido de Pestañas -->
+        <div class="tab-content" id="pills-tabContent">
+            <!-- Panel 1: Proyecto Laboral (LiveOps Engine) -->
+            <div class="tab-pane fade show active" id="pills-laboral" role="tabpanel" aria-labelledby="pills-laboral-tab">
+                <!-- 1. Header del Proyecto -->
+                <section class="banner-container">
             <div class="container-xl position-relative z-1 text-center">
                 <span class="badge bg-primary mb-3">AUTOMATIZACIÓN INTELIGENTE DE 3RA CAPA (AI3)</span>
                 <h1 class="display-3 fw-bold mb-3">LIVEOPS ENGINE</h1>
@@ -86,7 +108,7 @@
             </div>
             
             <!-- Decoración de fondo -->
-            <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient opacity-25" style="background: linear-gradient(45deg, #0d6efd, #6610f2);"></div>
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient opacity-25 banner-gradient-laboral"></div>
         </section>
 
         <!-- 2. Arquitectura Técnica -->
@@ -96,7 +118,7 @@
                     <div class="col-lg-5">
                         <h2 class="fw-bold mb-4">Arquitectura & Seguridad</h2>
                         <p class="lead text-body-secondary mb-4">
-                            No es solo un script. Es una aplicación de escritorio robusta desarrollada bajo el patrón <strong>MVC (Modelo-Vista-Controlador)</strong> para garantizar escalabilidad y mantenimiento.
+                            Aplicación de escritorio robusta desarrollada bajo el patrón <strong>MVC (Modelo-Vista-Controlador)</strong> para garantizar escalabilidad y mantenimiento.
                         </p>
                         <ul class="list-unstyled space-y-3">
                             <li class="d-flex gap-3">
@@ -267,7 +289,7 @@
                     <div class="col-lg-6">
                         <div class="p-3 bg-white rounded shadow-sm border">
                             <!-- Los Canvas se llenan con main.js -->
-                            <div class="chart-container" style="position: relative; height:300px;">
+                            <div class="chart-container chart-container-custom">
                                 <canvas id="impactChart"></canvas>
                                 <canvas id="automationChart" class="d-none"></canvas>
                             </div>
@@ -324,6 +346,166 @@
                 </a>
             </div>
         </section>
+            </div>
+            <!-- Fin Panel 1: Proyecto Laboral -->
+
+            <!-- Panel 2: Proyectos Académicos -->
+            <div class="tab-pane fade" id="pills-academico" role="tabpanel" aria-labelledby="pills-academico-tab">
+                <!-- Hero Section Proyectos Académicos -->
+                <section class="banner-container py-5">
+                    <div class="container-xl position-relative z-1 text-center">
+                        <span class="badge bg-primary mb-3">BOOTCAMP PYTHON & DJANGO</span>
+                        <h1 class="display-3 fw-bold mb-3">Full Stack Python & Django</h1>
+                        <p class="fs-4 text-light opacity-75 max-width-700 mx-auto mb-0">
+                            Proyectos desarrollados durante el bootcamp, demostrando dominio de Django, ORM, autenticación y gestión de bases de datos relacional.
+                        </p>
+                    </div>
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient opacity-25 banner-gradient-academico"></div>
+                </section>
+
+                <!-- Listado de Proyectos (Zig-Zag) -->
+                <section class="py-5 py-lg-6 bg-body">
+                    <div class="container-xl">
+                        <!-- Proyecto 1: Biblioteca IBG (Impar - Texto Izq) -->
+                        <div class="row align-items-center g-5 mb-5">
+                            <div class="col-lg-5">
+                                <h3 class="fw-bold mb-3">Biblioteca IBG</h3>
+                                <p class="text-body-secondary lead mb-3">
+                                    Sistema de gestión bibliotecaria con control de catálogo, autores y préstamos. Modelos relacionales.
+                                </p>
+                                <div class="d-flex gap-2 flex-wrap mb-4">
+                                    <span class="badge bg-light text-dark border">Django</span>
+                                    <span class="badge bg-light text-dark border">Bootstrap</span>
+                                    <span class="badge bg-light text-dark border">SQLite</span>
+                                </div>
+                                <a href="https://github.com/Jotaem/M6_Evaluaci-n_portafolio_Biblioteca_IBG" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                    <i class="bi bi-github me-2"></i> Ver Repositorio
+                                </a>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="monitor-frame">
+                                    <img src="assets/images/Proyectos_django/biblioteca_ibg.png" alt="Biblioteca IBG" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 2: App de Recetas (Par - Imagen Izq) -->
+                        <div class="row align-items-center g-5 mb-5 flex-lg-row-reverse">
+                            <div class="col-lg-5">
+                                <h3 class="fw-bold mb-3">App de Recetas</h3>
+                                <p class="text-body-secondary lead mb-3">
+                                    Plataforma culinaria para crear y explorar recetas. Manejo de archivos multimedia (imágenes).
+                                </p>
+                                <div class="d-flex gap-2 flex-wrap mb-4">
+                                    <span class="badge bg-light text-dark border">Django</span>
+                                    <span class="badge bg-light text-dark border">CSS3</span>
+                                    <span class="badge bg-light text-dark border">Pillow</span>
+                                </div>
+                                <a href="https://github.com/Jotaem/M6_AE3_ABPRO_Grupal" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                    <i class="bi bi-github me-2"></i> Ver Repositorio
+                                </a>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="monitor-frame">
+                                    <img src="assets/images/Proyectos_django/app_recetas.png" alt="App de Recetas" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 3: Gestor de Tareas (Impar - Texto Izq) -->
+                        <div class="row align-items-center g-5 mb-5">
+                            <div class="col-lg-5">
+                                <h3 class="fw-bold mb-3">Gestor de Tareas</h3>
+                                <p class="text-body-secondary lead mb-3">
+                                    To-Do List productiva con gestión de estados, priorización y fechas límite.
+                                </p>
+                                <div class="d-flex gap-2 flex-wrap mb-4">
+                                    <span class="badge bg-light text-dark border">Django</span>
+                                    <span class="badge bg-light text-dark border">JavaScript</span>
+                                    <span class="badge bg-light text-dark border">Crispy Forms</span>
+                                </div>
+                                <a href="https://github.com/Jotaem/M6_Evaluacion_Django_Jonathan-Matus" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                    <i class="bi bi-github me-2"></i> Ver Repositorio
+                                </a>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="monitor-frame">
+                                    <img src="assets/images/Proyectos_django/gestor_tareas.png" alt="Gestor de Tareas" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 4: Plataforma de Gestión de Eventos (Par - Imagen Izq) -->
+                        <div class="row align-items-center g-5 mb-5 flex-lg-row-reverse">
+                            <div class="col-lg-5">
+                                <h3 class="fw-bold mb-3">Plataforma de Gestión de Eventos</h3>
+                                <p class="text-body-secondary lead mb-3">
+                                    Organización de eventos, aforos y registro de asistentes. Relaciones Many-to-Many.
+                                </p>
+                                <div class="d-flex gap-2 flex-wrap mb-4">
+                                    <span class="badge bg-light text-dark border">Django ORM</span>
+                                    <span class="badge bg-light text-dark border">Bootstrap 5</span>
+                                </div>
+                                <a href="https://github.com/Jotaem/M6_AE5_ABPRO-Grupal" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                    <i class="bi bi-github me-2"></i> Ver Repositorio
+                                </a>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="monitor-frame">
+                                    <img src="assets/images/Proyectos_django/gestion_eventos.png" alt="Gestión de Eventos" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 5: Plataforma de Gestión de Productos (Impar - Texto Izq) -->
+                        <div class="row align-items-center g-5 mb-5">
+                            <div class="col-lg-5">
+                                <h3 class="fw-bold mb-3">Plataforma de Gestión de Productos</h3>
+                                <p class="text-body-secondary lead mb-3">
+                                    Backend E-commerce administrativo. Control de stock y categorías. Personalización del Admin.
+                                </p>
+                                <div class="d-flex gap-2 flex-wrap mb-4">
+                                    <span class="badge bg-light text-dark border">Django Admin</span>
+                                    <span class="badge bg-light text-dark border">PostgreSQL</span>
+                                </div>
+                                <a href="https://github.com/Jotaem/M6_AE6_ABPRO-Individual" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                    <i class="bi bi-github me-2"></i> Ver Repositorio
+                                </a>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="monitor-frame">
+                                    <img src="assets/images/Proyectos_django/gestion_productos.png" alt="Gestión de Productos" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 6: Gestión Académica (Par - Imagen Izq) -->
+                        <div class="row align-items-center g-5 flex-lg-row-reverse">
+                            <div class="col-lg-5">
+                                <h3 class="fw-bold mb-3">Proyecto de Gestión Académica</h3>
+                                <p class="text-body-secondary lead mb-3">
+                                    ERP educativo para alumnos y profesores. Uso intensivo de Class Based Views.
+                                </p>
+                                <div class="d-flex gap-2 flex-wrap mb-4">
+                                    <span class="badge bg-light text-dark border">Django CBVs</span>
+                                    <span class="badge bg-light text-dark border">Auth System</span>
+                                </div>
+                                <a href="https://github.com/Jotaem/M7_AE3_ABPRO-Grupal" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                    <i class="bi bi-github me-2"></i> Ver Repositorio
+                                </a>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="monitor-frame">
+                                    <img src="assets/images/Proyectos_django/gestion_academica.png" alt="Gestión Académica" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Fin Panel 2: Proyectos Académicos -->
+        </div>
+        <!-- Fin tab-content -->
 
     </main>
 

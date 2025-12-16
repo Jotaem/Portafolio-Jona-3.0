@@ -771,3 +771,161 @@ html[data-bs-theme="dark"] .carousel-3d-item img[alt*="JavaScript"] {
     height: 1.5em;
     cursor: pointer;
 }
+
+/* ===== SISTEMA DE PESTAÑAS (PROJECT PILLS) ===== */
+.project-nav-pills {
+    position: sticky;
+    top: 56px;
+    z-index: 99;
+}
+
+.project-pills {
+    margin-bottom: 0;
+}
+
+.project-pills .nav-link {
+    background-color: #f0f0f0;
+    color: #212529;
+    border: none;
+    font-weight: 500;
+    transition: all var(--transition-duration) ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+html[data-bs-theme="dark"] .project-pills .nav-link {
+    background-color: #3a3f47;
+    color: #e9ecef;
+}
+
+.project-pills .nav-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #e0e0e0;
+}
+
+html[data-bs-theme="dark"] .project-pills .nav-link:hover {
+    background-color: #4a505a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.project-pills .nav-link.active {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+}
+
+.project-pills .nav-link.active:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.4);
+}
+
+/* ===== MONITOR FRAME (Diseño de Pantalla de PC) ===== */
+.monitor-frame {
+    position: relative;
+    background: var(--bs-body-bg);
+    border: 16px solid #1a1a1a;
+    border-bottom-width: 50px;
+    border-radius: 12px;
+    box-shadow: 
+        0 0 0 1px rgba(0, 0, 0, 0.1),
+        0 20px 60px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all var(--transition-duration);
+}
+
+html[data-bs-theme="dark"] .monitor-frame {
+    border-color: #0a0a0a;
+    box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Pie del monitor (mentón) */
+.monitor-frame::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 20px;
+    background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
+    border-radius: 0 0 20px 20px;
+}
+
+html[data-bs-theme="dark"] .monitor-frame::after {
+    background: linear-gradient(to bottom, #0a0a0a, #000);
+}
+
+.monitor-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform var(--transition-duration) ease;
+}
+
+/* Efecto Hover: Elevación del Monitor y Zoom de Imagen */
+.row:has(.monitor-frame):hover .monitor-frame {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 0 0 1px rgba(0, 0, 0, 0.1),
+        0 30px 80px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+html[data-bs-theme="dark"] .row:has(.monitor-frame):hover .monitor-frame {
+    box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.row:has(.monitor-frame):hover .monitor-frame img {
+    transform: scale(1.03);
+}
+
+/* ===== CHART CONTAINER ===== */
+.chart-container-custom {
+    position: relative;
+    height: 300px;
+}
+
+@media (max-width: 640px) {
+    .chart-container-custom {
+        height: 250px;
+    }
+}
+
+/* ===== BANNER GRADIENTS ===== */
+.banner-gradient-laboral {
+    background: linear-gradient(45deg, #0d6efd, #6610f2);
+}
+
+.banner-gradient-academico {
+    background: linear-gradient(45deg, #6610f2, #0dcaf0);
+}
+
+/* ===== TABS RESPONSIVA ===== */
+@media (max-width: 768px) {
+    .project-pills {
+        flex-wrap: wrap;
+        gap: 0.5rem !important;
+    }
+
+    .project-pills .nav-link {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem !important;
+    }
+
+    .monitor-frame {
+        border-width: 12px;
+        border-bottom-width: 40px;
+    }
+
+    .monitor-frame::after {
+        width: 80px;
+        height: 16px;
+    }
+}
