@@ -1,10 +1,12 @@
+[Banner](assets/images/banner_readme.png)
+
 # Portafolio Profesional - Jonathan Matus
 
 Este es el repositorio del código fuente de mi portafolio profesional, una single-page application (SPA) estática que narra mi trayectoria desde Ingeniero en Logística a Desarrollador de Soluciones.
 
 El proyecto está diseñado para ser un escaparate interactivo de mi experiencia, proyectos clave y competencias técnicas, demostrando cómo aplico mi conocimiento dual (Operaciones + Tecnología) para resolver problemas de negocio complejos.
 
-**[Ver el portafolio en vivo](https://jonathanmatus.dev)** (Nota: El enlace es un marcador de posición)
+**[Ver el portafolio en vivo](https://jotaem.github.io/Portafolio-Jona-3.0/index.html#inicio)**
 
 ## Tecnologías Utilizadas
 
