@@ -1,6 +1,6 @@
-[Banner](assets/images/banner_readme.png)
+![Banner](assets/images/banner_readme.png)
 
-# Portafolio Profesional - Jonathan Matus
+# Portafolio Profesional
 
 Este es el repositorio del código fuente de mi portafolio profesional, una single-page application (SPA) estática que narra mi trayectoria desde Ingeniero en Logística a Desarrollador de Soluciones.
 
@@ -55,56 +55,6 @@ Este portafolio está construido desde cero utilizando tecnologías web estánda
 -   **Diseño Responsivo (Mobile-First):** Totalmente adaptable a dispositivos de escritorio, tabletas y móviles gracias a Bootstrap 5.
 -   **Tema Claro/Oscuro:** Un interruptor permite al usuario cambiar entre un tema claro y uno oscuro para una mejor experiencia de visualización.
 -   **Línea de Tiempo Interactiva:** La trayectoria profesional se presenta en una línea de tiempo vertical y visual.
-
-## Cómo Ejecutar Localmente
-
-Este es un proyecto web estático. No requiere un servidor complejo para funcionar.
-
-1.  **Clonar el repositorio:**
-    ```bash
-    git clone https://github.com/tu-usuario/tu-repositorio.git
-    cd tu-repositorio
-    ```
-
-2.  **Abrir el archivo `index.html`:**
-    Simplemente abre el archivo `index.html` en tu navegador web preferido (Chrome, Firefox, Edge).
-
-    ```bash
-    # En Windows
-    start index.html
-    # En macOS
-    open index.html
-    # En Linux
-    xdg-open index.html
-    ```
-
-    **Nota:** Algunas funcionalidades que realizan peticiones (como la carga de PDFs con `pdf.js`) pueden funcionar mejor si se sirven a través de un servidor web local para evitar problemas de CORS. Puedes usar la extensión `Live Server` en Visual Studio Code o un simple servidor de Python:
-
-    ```bash
-    # Inicia un servidor en el puerto 8000
-    python -m http.server
-    ```
-    Luego, navega a `http://localhost:8000` en tu navegador.
-
-## Scripts de Apoyo
-
-### `generate_thumbnails.py`
-
-Este script de Python automatiza la creación de imágenes de vista previa (thumbnails) en formato PNG a partir de los archivos PDF de los certificados.
-
--   **Propósito:** Crear imágenes ligeras para mostrar en la galería de certificados sin tener que cargar los PDFs completos inicialmente.
--   **Uso:**
-    1.  Asegúrate de tener Python instalado.
-    2.  Instala las dependencias:
-        ```bash
-        pip install pdf2image pillow
-        ```
-        Es posible que `pdf2image` requiera la instalación de `poppler`. Sigue las instrucciones de la librería para tu sistema operativo.
-    3.  Ejecuta el script desde la raíz del proyecto:
-        ```bash
-        python generate_thumbnails.py
-        ```
-    4.  El script leerá los PDFs de `assets/degree_certificates` y `assets/linkedin_certificates` y guardará los thumbnails en una nueva carpeta `assets/thumbnails`.
 
 ---
 
